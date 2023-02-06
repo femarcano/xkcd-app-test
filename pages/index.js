@@ -3,6 +3,7 @@ import Image from 'next/image'
 import {Inter} from '@next/font/google'
 import styles from '@/styles/Home.module.css'
 import Header from '../components/Header'
+import fs from 'fs/promises'
 
 const inter = Inter({subsets: ['latin']})
 
@@ -20,4 +21,22 @@ export default function Home() {
             </main>
         </>
     )
+}
+
+export async function getStaticProps(context) {
+    const files = await fs.readdir('./comics')
+    const latestComicsFiles = files.slice(-8, files.length)
+
+    const promisesReadFiles = latestComicsFiles.map(async (file) => {
+        const content = await fs.readFile(`./comics/${file}`, "utf-8")
+        return JSON.parse(content)
+    })
+
+    const latestComics = await Promise.all(promisesReadFiles)
+    console.log(latestComics)
+    return {
+        props: {
+            latestComics
+        }
+    }
 }

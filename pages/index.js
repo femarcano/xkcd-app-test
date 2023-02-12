@@ -19,16 +19,26 @@ export default function Home({ latestComics }) {
       </Head>
       <main>
         <Header></Header>
-        <h2>Latest Comics</h2>
-        {latestComics.map((comic) => {
-          return (
-            <>
-              <Link href={`/comic/${comic.id}`} key={comic.id}>
-                <img src={comic.img} alt={comic.alt} />
+        <h2 className="text-3xl font-bold text-center mb-10">Latest Comics</h2>
+        <section className="grid grid-cols-2 gap-4 justify-items-center max-w-xl3 m-auto sm:grid-cols-2 md:grid-cols-3">
+          {latestComics.map((comic) => {
+            return (
+              <Link
+                className="mb-4 pb-4"
+                href={`/comic/${comic.id}`}
+                key={comic.id}
+              >
+                <h3 className="text-lg font-bold text-center">{comic.title}</h3>
+                <Image
+                  width={comic.width}
+                  height={comic.height}
+                  src={comic.img}
+                  alt={comic.alt}
+                />
               </Link>
-            </>
-          )
-        })}
+            )
+          })}
+        </section>
       </main>
     </>
   )

@@ -52,7 +52,6 @@ export async function getServerSideProps(context) {
   const { q = '' } = query
 
   const { results } = await search({ query: q })
-  console.log(results)
 
   return {
     props: { query: q, results: results },

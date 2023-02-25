@@ -6,6 +6,10 @@ const nextConfig = {
       { protocol: 'https', hostname: 'imgs.xkcd.com', port: '' },
     ],
   },
+  i18n: {
+    locales: ['en', 'es'],
+    defaultLocale: 'en',
+  },
 }
 
 module.exports = nextConfig

@@ -1,4 +1,5 @@
 import { Layout } from '@/components/Layout'
+import { useI18N } from '@/context/i18n'
 import { Inter } from '@next/font/google'
 import fs from 'fs/promises'
 import Head from 'next/head'
@@ -8,6 +9,7 @@ import Link from 'next/link'
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Home({ latestComics }) {
+  const { t } = useI18N()
   return (
     <>
       <Head>
@@ -17,8 +19,10 @@ export default function Home({ latestComics }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Layout>
-        <h2 className="text-3xl font-bold text-center mb-10">Latest Comics</h2>
-        <section className="grid grid-cols-2 gap-4 justify-items-center max-w-xl3 m-auto sm:grid-cols-2 md:grid-cols-3">
+        <h2 className="text-3xl font-bold text-center mb-10">
+          {t('LATEST_COMICS')}
+        </h2>
+        <section className="grid grid-cols-2 gap-4 justify-items-center sm:grid-cols-2 md:grid-cols-3">
           {latestComics.map((comic) => {
             return (
               <Link
